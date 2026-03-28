@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>tailor.ai | Professional Identity Refined</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;family=DM+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-lowest": "#0e0e0e",
+              "surface-container-low": "#1c1b1b",
+              "on-tertiary-fixed": "#00201c",
+              "primary-fixed": "#e1e0ff",
+              "surface-dim": "#131313",
+              "on-secondary-container": "#bfb2e0",
+              "background": "#131313",
+              "on-tertiary-container": "#00302a",
+              "outline-variant": "#464554",
+              "tertiary-fixed": "#71f8e4",
+              "on-secondary": "#342a50",
+              "inverse-primary": "#494bd6",
+              "on-primary": "#1000a9",
+              "primary-fixed-dim": "#c0c1ff",
+              "surface": "#131313",
+              "surface-container-high": "#2a2a2a",
+              "on-tertiary-fixed-variant": "#005048",
+              "on-tertiary": "#003731",
+              "tertiary-container": "#00a392",
+              "tertiary": "#4fdbc8",
+              "surface-container": "#201f1f",
+              "error": "#ffb4ab",
+              "on-secondary-fixed-variant": "#4b4168",
+              "secondary-container": "#4d436a",
+              "error-container": "#93000a",
+              "tertiary-fixed-dim": "#4fdbc8",
+              "outline": "#908fa0",
+              "surface-bright": "#3a3939",
+              "secondary": "#cdbfef",
+              "secondary-fixed-dim": "#cdbfef",
+              "inverse-surface": "#e5e2e1",
+              "surface-tint": "#c0c1ff",
+              "on-background": "#e5e2e1",
+              "on-secondary-fixed": "#1f153a",
+              "inverse-on-surface": "#313030",
+              "surface-variant": "#353534",
+              "primary": "#c0c1ff",
+              "secondary-fixed": "#e8ddff",
+              "surface-container-highest": "#353534",
+              "primary-container": "#8083ff",
+              "on-primary-fixed-variant": "#2f2ebe",
+              "on-surface": "#e5e2e1",
+              "on-surface-variant": "#c7c4d7",
+              "on-error-container": "#ffdad6",
+              "on-primary-fixed": "#07006c",
+              "on-error": "#690005",
+              "on-primary-container": "#0d0096"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Space Grotesk"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .cv-canvas-shadow {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .text-gradient-primary {
+            background: linear-gradient(135deg, #c0c1ff 0%, #8083ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .button-gradient {
+            background: linear-gradient(135deg, #c0c1ff 0%, #8083ff 100%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-6 py-4 max-w-full bg-[#131313] font-['Inter'] antialiased tracking-tight">
+<div class="text-xl font-bold tracking-tighter text-white">tailor.ai</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-gray-400 hover:text-white transition-colors" href="#pricing">Pricing</a>
+<a class="text-gray-400 hover:text-white transition-colors" href="#">FAQ</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-gray-400 hover:text-white transition-colors font-medium">Sign in</button>
+<button class="button-gradient text-on-primary-container px-5 py-2 rounded-lg font-semibold hover:scale-[1.02] transition-transform duration-200 active:scale-95">Get started</button>
+</div>
+</nav>
+<main class="pt-24">
+<!-- Hero Section -->
+<section class="relative px-6 pt-20 pb-32 overflow-hidden">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7 z-10">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high border border-outline-variant/20 mb-6">
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="font-label text-xs tracking-widest uppercase text-on-surface-variant">AI-Powered precision</span>
+</div>
+<h1 class="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter text-white leading-[0.9] mb-8">
+                        Build your profile once. <br/>
+<span class="text-gradient-primary">Tailor in seconds.</span>
+</h1>
+<p class="text-on-surface-variant text-lg md:text-xl max-w-xl leading-relaxed mb-10">
+                        Stop wasting hours manually editing CVs. Paste a job description and let our AI architect a perfectly fitted professional identity for every application.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="button-gradient text-on-primary-container px-8 py-4 rounded-lg font-bold text-lg hover:scale-[1.02] transition-transform shadow-lg shadow-primary/20">
+                            Get started for free
+                        </button>
+<button class="px-8 py-4 rounded-lg font-bold text-lg border border-outline-variant/30 hover:bg-surface-container transition-colors">
+                            View Examples
+                        </button>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<!-- CV Preview Mockup -->
+<div class="relative z-10 bg-surface-container-lowest p-8 rounded-xl cv-canvas-shadow border border-outline-variant/10 transform rotate-2 lg:scale-110">
+<div class="flex items-center justify-between mb-8">
+<div class="h-3 w-24 bg-surface-container-high rounded"></div>
+<div class="h-3 w-12 bg-tertiary/20 rounded"></div>
+</div>
+<div class="space-y-4">
+<div class="h-8 w-3/4 bg-white/90 rounded mb-6"></div>
+<div class="space-y-2">
+<div class="h-2 w-full bg-outline-variant/30 rounded"></div>
+<div class="h-2 w-full bg-outline-variant/30 rounded"></div>
+<div class="h-2 w-4/5 bg-outline-variant/30 rounded"></div>
+</div>
+<div class="pt-6 space-y-4">
+<div class="h-4 w-1/3 bg-tertiary/40 rounded"></div>
+<div class="grid grid-cols-2 gap-4">
+<div class="h-12 bg-surface-container-high rounded border border-tertiary/20"></div>
+<div class="h-12 bg-surface-container-high rounded"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Background Decorative Glow -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-primary/10 blur-[120px] rounded-full -z-0"></div>
+</div>
+</div>
+</section>
+<!-- How It Works (Bento Style) -->
+<section class="py-32 px-6 bg-surface-container-low">
+<div class="max-w-7xl mx-auto">
+<div class="mb-20">
+<h2 class="font-headline text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">Precision Workflow</h2>
+<p class="text-on-surface-variant max-w-md">Our editorial engine transforms your history into a targeted narrative in three deliberate steps.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Step 1 -->
+<div class="group p-8 rounded-2xl bg-surface-container hover:bg-surface-container-high transition-all duration-300">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">person_add</span>
+</div>
+<div class="font-label text-xs text-primary font-bold tracking-widest mb-2 uppercase">Step 01</div>
+<h3 class="text-xl font-bold text-white mb-3">Build Core Profile</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Import your existing LinkedIn or PDF. Our AI parses every nuance of your career history once and for all.</p>
+</div>
+<!-- Step 2 -->
+<div class="group p-8 rounded-2xl bg-surface-container hover:bg-surface-container-high transition-all duration-300 border-t-2 border-primary/20">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">content_paste</span>
+</div>
+<div class="font-label text-xs text-primary font-bold tracking-widest mb-2 uppercase">Step 02</div>
+<h3 class="text-xl font-bold text-white mb-3">Paste Job Context</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Drop in the job description of your dreams. Our engine analyzes the keywords, tone, and cultural requirements.</p>
+</div>
+<!-- Step 3 -->
+<div class="group p-8 rounded-2xl bg-surface-container hover:bg-surface-container-high transition-all duration-300">
+<div class="w-12 h-12 rounded-xl bg-surface-container-highest flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">magic_button</span>
+</div>
+<div class="font-label text-xs text-primary font-bold tracking-widest mb-2 uppercase">Step 03</div>
+<h3 class="text-xl font-bold text-white mb-3">Instant Tailoring</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">The "Digital Tailor" refines bullet points and highlights to match the ATS criteria perfectly.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Features (Asymmetric Layout) -->
+<section class="py-32 px-6 overflow-hidden">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+<div class="relative order-2 lg:order-1">
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-4">
+<div class="bg-surface-container p-6 rounded-xl border border-outline-variant/10">
+<span class="material-symbols-outlined text-tertiary mb-4">check_circle</span>
+<h4 class="text-white font-bold mb-2">99% ATS Score</h4>
+<p class="text-xs text-on-surface-variant">Guaranteed parsing compatibility with Greenhouse, Workday, and Lever.</p>
+</div>
+<div class="bg-surface-container-high p-6 rounded-xl border border-outline-variant/10 translate-x-4">
+<span class="material-symbols-outlined text-primary mb-4">language</span>
+<h4 class="text-white font-bold mb-2">Bilingual Support</h4>
+<p class="text-xs text-on-surface-variant">Seamlessly translate and adapt your CV for global markets.</p>
+</div>
+</div>
+<div class="space-y-4 pt-12">
+<div class="bg-surface-container-high p-6 rounded-xl border border-outline-variant/10 -translate-x-4">
+<span class="material-symbols-outlined text-primary mb-4">edit_note</span>
+<h4 class="text-white font-bold mb-2">Inline Editing</h4>
+<p class="text-xs text-on-surface-variant">Live AI suggestions while you make final manual tweaks.</p>
+</div>
+<div class="bg-surface-container p-6 rounded-xl border border-outline-variant/10">
+<span class="material-symbols-outlined text-tertiary mb-4">picture_as_pdf</span>
+<h4 class="text-white font-bold mb-2">PDF Export</h4>
+<p class="text-xs text-on-surface-variant">Clean, professional typography optimized for screen and print.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="order-1 lg:order-2">
+<h2 class="font-headline text-4xl font-black text-white mb-6 leading-tight">Advanced tools for the <br/><span class="text-tertiary">Modern Applicant.</span></h2>
+<p class="text-on-surface-variant text-lg mb-8 leading-relaxed">
+                            We don't just rewrite text. We architect your professional story to meet the exact technical and cultural expectations of your next employer.
+                        </p>
+<ul class="space-y-4">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl">done_all</span>
+<span class="text-white font-medium">Automatic keyword optimization</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl">done_all</span>
+<span class="text-white font-medium">Smart tone adjustment</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl">done_all</span>
+<span class="text-white font-medium">Real-time impact scoring</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Pricing Section -->
+<section class="py-32 px-6 bg-surface-container-lowest" id="pricing">
+<div class="max-w-7xl mx-auto text-center mb-20">
+<h2 class="font-headline text-4xl font-bold text-white mb-4">Simple, transparent pricing</h2>
+<p class="text-on-surface-variant">Invest in your career. Pay only for what you need.</p>
+</div>
+<div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Free -->
+<div class="bg-surface-container-low p-10 rounded-2xl flex flex-col items-start border border-outline-variant/5">
+<div class="font-label text-xs tracking-widest text-on-surface-variant uppercase mb-4">Entry</div>
+<h3 class="text-2xl font-bold text-white mb-2">Free</h3>
+<div class="flex items-baseline gap-1 mb-8">
+<span class="text-4xl font-black text-white">$0</span>
+<span class="text-on-surface-variant text-sm">/forever</span>
+</div>
+<ul class="space-y-4 mb-10 text-left w-full">
+<li class="flex items-center gap-3 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg">check</span>
+                            5 Tailored CVs
+                        </li>
+<li class="flex items-center gap-3 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg">check</span>
+                            Standard Templates
+                        </li>
+</ul>
+<button class="w-full py-3 rounded-lg border border-outline-variant/30 text-white font-bold mt-auto hover:bg-surface-container transition-colors">Start Free</button>
+</div>
+<!-- Starter (Featured) -->
+<div class="bg-surface-container p-10 rounded-2xl flex flex-col items-start border-2 border-primary relative transform lg:scale-105 shadow-2xl shadow-primary/10">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-on-primary-container px-4 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">Most Popular</div>
+<div class="font-label text-xs tracking-widest text-primary font-bold uppercase mb-4">Professional</div>
+<h3 class="text-2xl font-bold text-white mb-2">Starter</h3>
+<div class="flex items-baseline gap-1 mb-8">
+<span class="text-4xl font-black text-white">$10</span>
+<span class="text-on-surface-variant text-sm">/one-time</span>
+</div>
+<ul class="space-y-4 mb-10 text-left w-full">
+<li class="flex items-center gap-3 text-sm text-white font-medium">
+<span class="material-symbols-outlined text-primary text-lg">check</span>
+                            50 Tailored CVs
+                        </li>
+<li class="flex items-center gap-3 text-sm text-white font-medium">
+<span class="material-symbols-outlined text-primary text-lg">check</span>
+                            AI Cover Letter Generator
+                        </li>
+<li class="flex items-center gap-3 text-sm text-white font-medium">
+<span class="material-symbols-outlined text-primary text-lg">check</span>
+                            Premium Templates
+                        </li>
+</ul>
+<button class="w-full py-3 rounded-lg button-gradient text-on-primary-container font-bold mt-auto hover:scale-[1.02] transition-transform">Get Started</button>
+</div>
+<!-- Pro -->
+<div class="bg-surface-container-low p-10 rounded-2xl flex flex-col items-start border border-outline-variant/5">
+<div class="font-label text-xs tracking-widest text-on-surface-variant uppercase mb-4">Unlimited</div>
+<h3 class="text-2xl font-bold text-white mb-2">Pro</h3>
+<div class="flex items-baseline gap-1 mb-8">
+<span class="text-4xl font-black text-white">$20</span>
+<span class="text-on-surface-variant text-sm">/one-time</span>
+</div>
+<ul class="space-y-4 mb-10 text-left w-full">
+<li class="flex items-center gap-3 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg">check</span>
+                            100 Tailored CVs
+                        </li>
+<li class="flex items-center gap-3 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg">check</span>
+                            Priority AI Processing
+                        </li>
+<li class="flex items-center gap-3 text-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-primary text-lg">check</span>
+                            Personal Branding Kit
+                        </li>
+</ul>
+<button class="w-full py-3 rounded-lg border border-outline-variant/30 text-white font-bold mt-auto hover:bg-surface-container transition-colors">Go Pro</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Minimalist Footer -->
+<footer class="py-12 px-6 border-t border-outline-variant/10">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="text-lg font-black tracking-tighter text-white">tailor.ai</div>
+<div class="flex gap-8 text-sm text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms</a>
+<a class="hover:text-primary transition-colors" href="#">Contact</a>
+</div>
+<div class="text-sm font-label text-outline uppercase tracking-widest">© 2024 tailored identity inc.</div>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 md:hidden bg-[#131313]/90 backdrop-blur-xl border-t border-white/10 shadow-2xl">
+<div class="flex flex-col items-center justify-center bg-[#6366F1] text-white rounded-xl px-3 py-1 font-['Inter'] text-[10px] uppercase tracking-widest">
+<span class="material-symbols-outlined">home</span>
+<span>Home</span>
+</div>
+<div class="flex flex-col items-center justify-center text-gray-500 font-['Inter'] text-[10px] uppercase tracking-widest">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span>Build</span>
+</div>
+<div class="flex flex-col items-center justify-center text-gray-500 font-['Inter'] text-[10px] uppercase tracking-widest">
+<span class="material-symbols-outlined">payments</span>
+<span>Pricing</span>
+</div>
+<div class="flex flex-col items-center justify-center text-gray-500 font-['Inter'] text-[10px] uppercase tracking-widest">
+<span class="material-symbols-outlined">person</span>
+<span>Login</span>
+</div>
+</nav>
+</body></html>

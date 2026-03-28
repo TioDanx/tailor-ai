@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__stitch__get_screen",
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm test:*)",
+      "Bash(node:*)",
+      "Bash(grep -rn '<img ' /d/dev/landing-andy/tailor-ai --include=*.tsx --include=*.jsx)",
+      "Bash(find /d/dev/landing-andy/tailor-ai -type d -name *dashboard*)",
+      "Bash(ls:*)",
+      "Bash(find /d/dev/landing-andy/tailor-ai/components -type f \\\\\\(-name *.tsx -o -name *.ts \\\\\\))",
+      "WebFetch(domain:ai.google.dev)",
+      "WebSearch",
+      "WebFetch(domain:discuss.ai.google.dev)",
+      "WebFetch(domain:aistudio.google.com)",
+      "WebFetch(domain:www.aifreeapi.com)",
+      "Skill(claude-api)"
+    ]
+  }
+}

@@ -1,0 +1,225 @@
+@import "tailwindcss";
+
+@theme {
+  /* ── Material Design 3 – Surface scale ── */
+  --color-background:               #131313;
+  --color-surface:                  #131313;
+  --color-surface-dim:              #131313;
+  --color-surface-container-lowest: #0e0e0e;
+  --color-surface-container-low:    #1c1b1b;
+  --color-surface-container:        #201f1f;
+  --color-surface-container-high:   #2a2a2a;
+  --color-surface-container-highest:#353534;
+  --color-surface-variant:          #353534;
+  --color-surface-bright:           #3a3939;
+  --color-surface-tint:             #c0c1ff;
+
+  /* ── Primary ── */
+  --color-primary:                  #c0c1ff;
+  --color-primary-container:        #8083ff;
+  --color-primary-fixed:            #e1e0ff;
+  --color-primary-fixed-dim:        #c0c1ff;
+  --color-on-primary:               #1000a9;
+  --color-on-primary-container:     #0d0096;
+  --color-on-primary-fixed:         #07006c;
+  --color-on-primary-fixed-variant: #2f2ebe;
+  --color-inverse-primary:          #494bd6;
+
+  /* ── Secondary ── */
+  --color-secondary:                #cdbfef;
+  --color-secondary-container:      #4d436a;
+  --color-secondary-fixed:          #e8ddff;
+  --color-secondary-fixed-dim:      #cdbfef;
+  --color-on-secondary:             #342a50;
+  --color-on-secondary-container:   #bfb2e0;
+  --color-on-secondary-fixed:       #1f153a;
+  --color-on-secondary-fixed-variant:#4b4168;
+
+  /* ── Tertiary ── */
+  --color-tertiary:                 #4fdbc8;
+  --color-tertiary-container:       #00a392;
+  --color-tertiary-fixed:           #71f8e4;
+  --color-tertiary-fixed-dim:       #4fdbc8;
+  --color-on-tertiary:              #003731;
+  --color-on-tertiary-container:    #00302a;
+  --color-on-tertiary-fixed:        #00201c;
+  --color-on-tertiary-fixed-variant:#005048;
+
+  /* ── Error ── */
+  --color-error:                    #ffb4ab;
+  --color-error-container:          #93000a;
+  --color-on-error:                 #690005;
+  --color-on-error-container:       #ffdad6;
+
+  /* ── On-surface ── */
+  --color-on-surface:               #e5e2e1;
+  --color-on-surface-variant:       #c7c4d7;
+  --color-on-background:            #e5e2e1;
+  --color-inverse-surface:          #e5e2e1;
+  --color-inverse-on-surface:       #313030;
+
+  /* ── Outline ── */
+  --color-outline:                  #908fa0;
+  --color-outline-variant:          #464554;
+
+  /* ── Fonts ── */
+  --font-headline: Inter, sans-serif;
+  --font-body:     Inter, sans-serif;
+  --font-label:    "Space Grotesk", sans-serif;
+  --font-mono:     "DM Mono", monospace;
+  --font-serif:    Georgia, serif;
+  --font-sans:     Inter, sans-serif;
+
+  /* ── Border radius (MD3 compact) ── */
+  --radius:      0.125rem;
+  --radius-sm:   0.125rem;
+  --radius-md:   0.25rem;
+  --radius-lg:   0.25rem;
+  --radius-xl:   0.5rem;
+  --radius-2xl:  0.75rem;
+  --radius-3xl:  1rem;
+  --radius-full: 0.75rem;
+}
+
+/* ── Global base ── */
+* {
+  box-sizing: border-box;
+}
+
+/* ── Focus: remove browser default outline globally (shows white in dark mode) ── */
+*,
+*:focus,
+*:focus-visible {
+  outline: none !important;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-on-surface);
+  font-family: Inter, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Material Symbols ── */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  user-select: none;
+}
+
+/* ── Utility classes used across pages ── */
+.text-gradient-primary {
+  background: linear-gradient(135deg, #c0c1ff 0%, #8083ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.button-gradient {
+  background: linear-gradient(135deg, #c0c1ff 0%, #8083ff 100%);
+}
+
+.cv-canvas {}
+
+.cv-canvas-shadow {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.cv-preview-shadow {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.ats-ring {
+  transform: rotate(-90deg);
+}
+
+/* ── Shimmer animation (CV skeleton) ── */
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ── Landing animations ── */
+@keyframes floatY {
+  0%, 100% { transform: rotate(2deg) translateY(0px); }
+  50%       { transform: rotate(2deg) translateY(-14px); }
+}
+
+@keyframes floatCard {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.10; }
+  50%       { opacity: 0.20; }
+}
+
+@keyframes scanBeam {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(3000%); }
+}
+
+@keyframes lineWrite {
+  0%   { width: 0%; }
+  100% { width: var(--line-w, 100%); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+.animate-float {
+  animation: floatY 5s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 5s ease-in-out infinite;
+}
+
+.animate-scan-beam {
+  animation: scanBeam 2.2s linear infinite;
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}
+
+.line-write {
+  width: 0%;
+  animation: lineWrite 0.6s ease-out forwards;
+}
+
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #131313;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #353534;
+}
+
+/* ── Selection ── */
+::selection {
+  background: #8083ff;
+  color: #0d0096;
+}

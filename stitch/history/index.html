@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>History - tailor.ai</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;family=DM+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-lowest": "#0e0e0e",
+              "surface-container-low": "#1c1b1b",
+              "on-tertiary-fixed": "#00201c",
+              "primary-fixed": "#e1e0ff",
+              "surface-dim": "#131313",
+              "on-secondary-container": "#bfb2e0",
+              "background": "#131313",
+              "on-tertiary-container": "#00302a",
+              "outline-variant": "#464554",
+              "tertiary-fixed": "#71f8e4",
+              "on-secondary": "#342a50",
+              "inverse-primary": "#494bd6",
+              "on-primary": "#1000a9",
+              "primary-fixed-dim": "#c0c1ff",
+              "surface": "#131313",
+              "surface-container-high": "#2a2a2a",
+              "on-tertiary-fixed-variant": "#005048",
+              "on-tertiary": "#003731",
+              "tertiary-container": "#00a392",
+              "tertiary": "#4fdbc8",
+              "surface-container": "#201f1f",
+              "error": "#ffb4ab",
+              "on-secondary-fixed-variant": "#4b4168",
+              "secondary-container": "#4d436a",
+              "error-container": "#93000a",
+              "tertiary-fixed-dim": "#4fdbc8",
+              "outline": "#908fa0",
+              "surface-bright": "#3a3939",
+              "secondary": "#cdbfef",
+              "secondary-fixed-dim": "#cdbfef",
+              "inverse-surface": "#e5e2e1",
+              "surface-tint": "#c0c1ff",
+              "on-background": "#e5e2e1",
+              "on-secondary-fixed": "#1f153a",
+              "inverse-on-surface": "#313030",
+              "surface-variant": "#353534",
+              "primary": "#c0c1ff",
+              "secondary-fixed": "#e8ddff",
+              "surface-container-highest": "#353534",
+              "primary-container": "#8083ff",
+              "on-primary-fixed-variant": "#2f2ebe",
+              "on-surface": "#e5e2e1",
+              "on-surface-variant": "#c7c4d7",
+              "on-error-container": "#ffdad6",
+              "on-primary-fixed": "#07006c",
+              "on-error": "#690005",
+              "on-primary-container": "#0d0096"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Space Grotesk"],
+              "mono": ["DM Mono"],
+              "serif": ["Georgia", "serif"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .cv-preview-shadow {
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #131313; }
+        ::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #353534; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container/30">
+<div class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-screen sticky left-0 top-0 p-4 gap-4 bg-[#1C1B1B] w-64">
+<div class="flex items-center gap-3 px-2 mb-8">
+<div class="w-8 h-8 bg-gradient-to-br from-primary to-primary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container text-xl" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<h1 class="text-lg font-black tracking-tighter text-white">tailor.ai</h1>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 hover:text-gray-200 hover:bg-[#2A2A2A] transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-['Inter'] text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 hover:text-gray-200 hover:bg-[#2A2A2A] transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-['Inter'] text-sm font-medium">Generate</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-[#201F1F] text-[#C0C1FF] rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-['Inter'] text-sm font-medium">History</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-gray-500 hover:text-gray-200 hover:bg-[#2A2A2A] transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Inter'] text-sm font-medium">Profile</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 space-y-4">
+<div class="bg-surface-container rounded-xl p-4">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] font-label text-outline uppercase tracking-wider">Quota: 12/50</span>
+<span class="material-symbols-outlined text-primary text-sm">database</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full" style="width: 24%"></div>
+</div>
+<button class="w-full mt-4 py-2 bg-surface-container-high hover:bg-surface-container-highest text-primary text-xs font-bold rounded-lg transition-all active:scale-[0.98]">
+                        Upgrade Credits
+                    </button>
+</div>
+<div class="flex items-center gap-3 px-2">
+<img alt="User Profile" class="w-10 h-10 rounded-full bg-surface-container-high" data-alt="Professional user profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5DKJF7tk_Itv8g9YWt74Lwg7lksk2MCpmZrO8UtSZUJTkbYEnkrymdzHH4O_jbrbq7gwm5vJG7HaQBPvKly80u94mnek_bKthjbbeSALHg0FlcX71ZXXikUXeTdbTPbCpCQksw0J2IAzN4gKhv10VagZmmlq5XBaoDtaGquVT_TF4QaNvoB1bPhlVln3svKcz6-YVGdSkOAid6orkQRAua68NEl522RJnHyc8bIXcywMoNAmmoNv3A3tHN8A1dwL_uOfhcR11qjY"/>
+<div class="overflow-hidden">
+<p class="text-sm font-bold text-white truncate">Professional Identity</p>
+<p class="text-[10px] text-outline truncate">Premium Member</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 min-w-0 bg-surface">
+<!-- Header/Search Area -->
+<header class="sticky top-0 z-30 bg-surface/80 backdrop-blur-md px-6 md:px-12 py-8 flex flex-col gap-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="text-4xl font-black tracking-tight text-white mb-2">History</h2>
+<p class="text-outline font-label text-sm uppercase tracking-widest">Your Tailored Professional Archive</p>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-low p-1.5 rounded-xl">
+<button class="p-2 rounded-lg bg-surface-container-high text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">grid_view</span>
+</button>
+<button class="p-2 rounded-lg text-outline hover:text-white transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined text-xl">list</span>
+</button>
+</div>
+</div>
+<div class="relative group">
+<div class="absolute inset-y-0 left-5 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline group-focus-within:text-primary transition-colors">search</span>
+</div>
+<input class="w-full bg-surface-container-low border-b-2 border-outline-variant/20 focus:border-primary focus:bg-surface-container focus:ring-0 text-white placeholder:text-outline/50 pl-14 pr-6 py-5 rounded-t-xl transition-all font-body" placeholder="Filter by role or company..." type="text"/>
+</div>
+</header>
+<!-- Grid Content -->
+<div class="px-6 md:px-12 pb-24">
+<div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+<!-- History Card 1 -->
+<div class="group relative bg-surface-container hover:bg-surface-container-high hover:-translate-y-1 transition-all duration-300 rounded-2xl p-6 overflow-hidden">
+<div class="absolute top-0 right-0 p-4">
+<div class="flex items-center gap-1.5 px-3 py-1 bg-tertiary/10 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span class="text-[10px] font-mono font-bold text-tertiary">94 ATS</span>
+</div>
+</div>
+<div class="flex flex-col h-full">
+<div class="mb-6">
+<span class="text-[10px] font-mono text-outline mb-1 block">Oct 24, 2023</span>
+<h3 class="text-xl font-bold text-white leading-tight group-hover:text-primary transition-colors">Senior Product Designer</h3>
+<p class="text-outline-variant font-medium">Stripe</p>
+</div>
+<div class="mt-auto flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-[10px] border-2 border-surface-container">AI</div>
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-[10px] border-2 border-surface-container text-primary">UX</div>
+</div>
+<button class="flex items-center gap-2 text-primary font-bold text-sm group/btn">
+                                    View CV
+                                    <span class="material-symbols-outlined text-lg group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- History Card 2 -->
+<div class="group relative bg-surface-container hover:bg-surface-container-high hover:-translate-y-1 transition-all duration-300 rounded-2xl p-6 overflow-hidden">
+<div class="absolute top-0 right-0 p-4">
+<div class="flex items-center gap-1.5 px-3 py-1 bg-tertiary/10 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span class="text-[10px] font-mono font-bold text-tertiary">88 ATS</span>
+</div>
+</div>
+<div class="flex flex-col h-full">
+<div class="mb-6">
+<span class="text-[10px] font-mono text-outline mb-1 block">Oct 21, 2023</span>
+<h3 class="text-xl font-bold text-white leading-tight group-hover:text-primary transition-colors">Fullstack Engineer</h3>
+<p class="text-outline-variant font-medium">Vercel</p>
+</div>
+<div class="mt-auto flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-[10px] border-2 border-surface-container">JS</div>
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-[10px] border-2 border-surface-container text-primary">TS</div>
+</div>
+<button class="flex items-center gap-2 text-primary font-bold text-sm group/btn">
+                                    View CV
+                                    <span class="material-symbols-outlined text-lg group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- History Card 3 -->
+<div class="group relative bg-surface-container hover:bg-surface-container-high hover:-translate-y-1 transition-all duration-300 rounded-2xl p-6 overflow-hidden">
+<div class="absolute top-0 right-0 p-4">
+<div class="flex items-center gap-1.5 px-3 py-1 bg-primary/10 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="text-[10px] font-mono font-bold text-primary">82 ATS</span>
+</div>
+</div>
+<div class="flex flex-col h-full">
+<div class="mb-6">
+<span class="text-[10px] font-mono text-outline mb-1 block">Oct 18, 2023</span>
+<h3 class="text-xl font-bold text-white leading-tight group-hover:text-primary transition-colors">Marketing Director</h3>
+<p class="text-outline-variant font-medium">Airbnb</p>
+</div>
+<div class="mt-auto flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-[10px] border-2 border-surface-container">PR</div>
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-[10px] border-2 border-surface-container text-primary">GR</div>
+</div>
+<button class="flex items-center gap-2 text-primary font-bold text-sm group/btn">
+                                    View CV
+                                    <span class="material-symbols-outlined text-lg group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- History Card 4 -->
+<div class="group relative bg-surface-container hover:bg-surface-container-high hover:-translate-y-1 transition-all duration-300 rounded-2xl p-6 overflow-hidden">
+<div class="absolute top-0 right-0 p-4">
+<div class="flex items-center gap-1.5 px-3 py-1 bg-tertiary/10 rounded-full">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span class="text-[10px] font-mono font-bold text-tertiary">91 ATS</span>
+</div>
+</div>
+<div class="flex flex-col h-full">
+<div class="mb-6">
+<span class="text-[10px] font-mono text-outline mb-1 block">Oct 12, 2023</span>
+<h3 class="text-xl font-bold text-white leading-tight group-hover:text-primary transition-colors">UX Researcher</h3>
+<p class="text-outline-variant font-medium">Google</p>
+</div>
+<div class="mt-auto flex items-center justify-between">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest flex items-center justify-center text-[10px] border-2 border-surface-container">RE</div>
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-[10px] border-2 border-surface-container text-primary">AN</div>
+</div>
+<button class="flex items-center gap-2 text-primary font-bold text-sm group/btn">
+                                    View CV
+                                    <span class="material-symbols-outlined text-lg group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Slide-over Component (Drawer) -->
+<!-- Logic note: This is fixed to the right, hidden by default in real apps, but rendered here for the prompt -->
+<div class="fixed inset-0 z-50 pointer-events-none overflow-hidden">
+<div class="absolute inset-0 bg-black/60 backdrop-blur-sm pointer-events-auto"></div>
+<div class="absolute inset-y-0 right-0 max-w-full flex">
+<div class="pointer-events-auto w-screen max-w-2xl bg-surface-container-low">
+<div class="h-full flex flex-col shadow-2xl">
+<!-- Drawer Header -->
+<div class="px-8 py-6 flex items-center justify-between border-b border-white/5">
+<div class="flex items-center gap-4">
+<button class="text-outline hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">close</span>
+</button>
+<h3 class="text-lg font-bold text-white">CV Preview</h3>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 bg-tertiary/10 px-3 py-1 rounded-lg">
+<span class="material-symbols-outlined text-tertiary text-sm" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-xs font-mono font-bold text-tertiary">94 ATS Score</span>
+</div>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary-container px-6 py-2 rounded-lg font-bold text-sm hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">download</span>
+                                    Download PDF
+                                </button>
+</div>
+</div>
+<!-- Drawer Content (CV Canvas) -->
+<div class="flex-1 overflow-y-auto bg-surface-container-lowest p-8 md:p-12">
+<div class="max-w-[800px] mx-auto bg-white text-black p-12 cv-preview-shadow min-h-[1050px] font-serif">
+<div class="border-b-2 border-black pb-8 mb-8 text-center">
+<h1 class="text-4xl font-black uppercase tracking-tight mb-2">Alex Sterling</h1>
+<div class="flex justify-center gap-4 text-sm font-medium italic">
+<span>San Francisco, CA</span>
+<span>•</span>
+<span>alex.sterling@email.com</span>
+<span>•</span>
+<span>portfolio.com</span>
+</div>
+</div>
+<section class="mb-8">
+<h2 class="text-lg font-bold uppercase tracking-wider border-b border-black/20 mb-4">Professional Summary</h2>
+<p class="text-[15px] leading-relaxed">
+                                        Visionary Product Designer with over 8 years of experience building scalable design systems for fintech and crypto-native platforms. Specialized in creating high-fidelity prototypes and orchestrating cross-functional design sprints to deliver user-centric solutions.
+                                    </p>
+</section>
+<section class="mb-8">
+<h2 class="text-lg font-bold uppercase tracking-wider border-b border-black/20 mb-4">Experience</h2>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-bold text-lg">Lead Product Designer</h3>
+<span class="text-sm italic">2020 – Present</span>
+</div>
+<p class="font-bold text-sm mb-2 italic">Stripe • San Francisco, CA</p>
+<ul class="list-disc ml-4 space-y-1 text-sm">
+<li>Spearheaded the redesign of the merchant onboarding flow, resulting in a 22% increase in activation rates within the first quarter.</li>
+<li>Mentored a team of 12 junior designers across 3 time zones, ensuring consistent application of the brand's visual identity.</li>
+<li>Partnered with engineering leads to implement a React-based design token library, reducing production handoff time by 40%.</li>
+</ul>
+</div>
+<div>
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-bold text-lg">Senior UI/UX Designer</h3>
+<span class="text-sm italic">2017 – 2020</span>
+</div>
+<p class="font-bold text-sm mb-2 italic">Coinbase • Remote</p>
+<ul class="list-disc ml-4 space-y-1 text-sm">
+<li>Designed the core mobile wallet experience for the initial public launch, supporting over 2M active monthly users.</li>
+<li>Developed interactive data visualization tools for crypto-asset tracking that became a industry standard for retail users.</li>
+</ul>
+</div>
+</div>
+</section>
+<section>
+<h2 class="text-lg font-bold uppercase tracking-wider border-b border-black/20 mb-4">Education</h2>
+<div class="flex justify-between items-baseline">
+<div>
+<h3 class="font-bold">B.F.A. in Interaction Design</h3>
+<p class="text-sm italic">Rhode Island School of Design</p>
+</div>
+<span class="text-sm italic">Class of 2016</span>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 left-0 w-full z-40 flex justify-around items-center px-4 py-3 md:hidden bg-[#131313]/90 backdrop-blur-xl border-t border-white/10 rounded-t-2xl shadow-2xl">
+<a class="flex flex-col items-center justify-center text-gray-500" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest mt-1">Generate</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#6366F1] text-white rounded-xl px-4 py-1.5 transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest mt-1">History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest mt-1">Profile</span>
+</a>
+</nav>
+</div>
+</body></html>
