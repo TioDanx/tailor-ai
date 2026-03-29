@@ -8,9 +8,10 @@ import { AccordionSection } from "@/components/ui/AccordionSection";
 import { SkillChip } from "@/components/ui/SkillChip";
 import { UserProfile, Experience, Education, Certification, Language, Project } from "@/types";
 
-// Safely coerce a Firestore field to string[]
-function toArr(val: unknown): string[] {
-  if (Array.isArray(val)) return val as string[];
+// Safely coerce a Firestore field to an array
+function toArr<T>(val: T[] | null | undefined): T[];
+function toArr(val: unknown): unknown[] {
+  if (Array.isArray(val)) return val;
   return [];
 }
 
