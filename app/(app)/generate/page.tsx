@@ -11,7 +11,7 @@ import { auth } from "@/lib/firebase";
 type LangMode = "auto" | "es" | "en";
 
 export default function GeneratePage() {
-  const { profile, updateProfile } = useUserProfile();
+  const { profile, updateProfile, refreshProfile } = useUserProfile();
   const { credits, hasQuota } = useUserQuota();
   const {
     analysis,
@@ -139,6 +139,7 @@ export default function GeneratePage() {
       setCvData(data.cvData);
       setAtsScore(data.atsScore ?? null);
       setModelUsed(data.modelUsed ?? null);
+      refreshProfile(); // update credit count after generation
     } catch (err) {
       setGenError(err instanceof Error ? err.message : "Failed to generate CV");
     } finally {

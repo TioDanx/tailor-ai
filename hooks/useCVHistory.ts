@@ -5,7 +5,7 @@ import {
   collection,
   query,
   orderBy,
-  onSnapshot,
+  getDocs,
   limit,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
@@ -27,7 +27,8 @@ export function useCVHistory(maxItems = 50) {
     const ref = collection(db, "users", user.uid, "cvHistory");
     const q   = query(ref, orderBy("createdAt", "desc"), limit(maxItems));
 
-    const unsubscribe = onSnapshot(q, (snap) => {
+    setLoading(true);
+    getDocs(q).then((snap) => {
       const docs = snap.docs.map((d) => ({
         id: d.id,
         ...d.data(),
@@ -35,8 +36,6 @@ export function useCVHistory(maxItems = 50) {
       setEntries(docs);
       setLoading(false);
     });
-
-    return unsubscribe;
   }, [user, maxItems]);
 
   return { entries, loading };

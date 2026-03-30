@@ -5,11 +5,12 @@ import {
   useContext,
   useEffect,
   useState,
+  useCallback,
   ReactNode,
 } from "react";
 import {
   doc,
-  onSnapshot,
+  getDoc,
   setDoc,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
@@ -20,6 +21,7 @@ interface UserProfileContextValue {
   profile: UserProfile | null;
   loading: boolean;
   updateProfile: (data: Partial<UserProfile>) => Promise<void>;
+  refreshProfile: () => Promise<void>;
 }
 
 const UserProfileContext = createContext<UserProfileContextValue | null>(null);
@@ -29,31 +31,38 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const fetchProfile = useCallback(async () => {
+    if (!user) return;
+    const ref = doc(db, "users", user.uid);
+    const snap = await getDoc(ref);
+    if (snap.exists()) {
+      setProfile({ uid: user.uid, ...snap.data() } as UserProfile);
+      setLoading(false);
+    } else {
+      // Profile doesn't exist yet — init server-side (prevents client-side credit tampering)
+      const idToken = await user.getIdToken();
+      await fetch("/api/user/init", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${idToken}` },
+      });
+      // Fetch again after init
+      const snap2 = await getDoc(ref);
+      if (snap2.exists()) {
+        setProfile({ uid: user.uid, ...snap2.data() } as UserProfile);
+      }
+      setLoading(false);
+    }
+  }, [user]);
+
   useEffect(() => {
     if (!user) {
       setProfile(null);
       setLoading(false);
       return;
     }
-
-    const ref = doc(db, "users", user.uid);
-    const unsubscribe = onSnapshot(ref, async (snap) => {
-      if (snap.exists()) {
-        setProfile({ uid: user.uid, ...snap.data() } as UserProfile);
-        setLoading(false);
-      } else {
-        // Profile doesn't exist yet — init server-side (prevents client-side credit tampering)
-        const idToken = await user.getIdToken();
-        await fetch("/api/user/init", {
-          method: "POST",
-          headers: { Authorization: `Bearer ${idToken}` },
-        });
-        // onSnapshot will fire again once the server writes the doc
-      }
-    });
-
-    return unsubscribe;
-  }, [user]);
+    setLoading(true);
+    fetchProfile();
+  }, [user, fetchProfile]);
 
   async function updateProfile(data: Partial<UserProfile>) {
     if (!user) return;
@@ -62,7 +71,7 @@ export function UserProfileProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <UserProfileContext.Provider value={{ profile, loading, updateProfile }}>
+    <UserProfileContext.Provider value={{ profile, loading, updateProfile, refreshProfile: fetchProfile }}>
       {children}
     </UserProfileContext.Provider>
   );
