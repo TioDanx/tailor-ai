@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { adminAuth } from "@/lib/firebaseAdmin";
-import { GEMINI_MODEL } from "@/lib/ai";
+import { GEMINI_MODEL_CHAIN } from "@/lib/ai";
 import { checkRateLimit } from "@/lib/rateLimit";
 
 export const maxDuration = 60;
@@ -33,16 +33,26 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Daily limit reached. Try again tomorrow." }, { status: 429 });
   }
 
-  const model = genAI.getGenerativeModel({ model: GEMINI_MODEL });
-
   const prompt = `You are a professional CV writer. Based on the following profile context, write a compelling professional summary paragraph (3-4 sentences, max 80 words). Be specific, results-oriented, and professional. Return ONLY the summary text, no quotes, no explanations.
 
 ${context}`;
 
   try {
-    const result = await model.generateContent(prompt);
-    const summary = result.response.text().trim();
-    return NextResponse.json({ summary });
+    let lastErr: unknown;
+    for (let i = 0; i < GEMINI_MODEL_CHAIN.length; i++) {
+      try {
+        const model = genAI.getGenerativeModel({ model: GEMINI_MODEL_CHAIN[i] });
+        const result = await model.generateContent(prompt);
+        const summary = result.response.text().trim();
+        return NextResponse.json({ summary });
+      } catch (err) {
+        lastErr = err;
+        const status = (err as { status?: number })?.status;
+        if ((status === 429 || status === 503) && i < GEMINI_MODEL_CHAIN.length - 1) continue;
+        throw err;
+      }
+    }
+    throw lastErr;
   } catch (err) {
     console.error("optimize-summary error:", err);
     return NextResponse.json({ error: "Failed to optimize summary" }, { status: 500 });

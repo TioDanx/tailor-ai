@@ -22,7 +22,7 @@ export async function checkRateLimit(uid: string, action: Action): Promise<boole
     const snap  = await tx.get(userRef);
     const count = (snap.data()?.rl?.[today]?.[action] ?? 0) as number;
     if (count < limit) {
-      tx.update(userRef, { [`rl.${today}.${action}`]: FieldValue.increment(1) });
+      tx.set(userRef, { rl: { [today]: { [action]: FieldValue.increment(1) } } }, { merge: true });
       allowed = true;
     }
   });

@@ -200,9 +200,10 @@ export default function ProfilePage() {
         if (incoming.length) mapped.certifications = [...(draft?.certifications ?? []), ...incoming];
       }
 
-      // Save immediately and apply to draft (not dirty — already persisted)
-      await updateProfile(mapped);
+      // Apply to draft immediately (UI updates now), then persist and sync context
       setDraft((prev) => (prev ? { ...prev, ...mapped } : prev));
+      await updateProfile(mapped);
+      await refreshProfile();
       setIsDirty(false);
       setUploadMessage({ type: "success", text: "CV parsed and profile updated successfully." });
     } catch (err) {
@@ -575,8 +576,8 @@ export default function ProfilePage() {
                       <label className="text-xs font-label uppercase tracking-widest text-outline">Achievements</label>
                       <ul className="space-y-2">
                         {(exp.achievements ?? []).map((a, ai) => (
-                          <li key={ai} className="flex gap-3 items-start">
-                            <span className="material-symbols-outlined text-outline text-sm pt-1.5">drag_indicator</span>
+                          <li key={ai} className="flex gap-3 items-center">
+                            <span className="material-symbols-outlined text-outline text-sm shrink-0">drag_indicator</span>
                             <input
                               value={a}
                               onChange={(e) => {
@@ -592,7 +593,7 @@ export default function ProfilePage() {
                                 const next = (exp.achievements ?? []).filter((_, i) => i !== ai);
                                 updateExpNow(idx, { achievements: next });
                               }}
-                              className="text-outline hover:text-error transition-colors mt-1"
+                              className="text-outline hover:text-error transition-colors shrink-0"
                             >
                               <span className="material-symbols-outlined text-xs">close</span>
                             </button>

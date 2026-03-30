@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
   const ref  = adminDb.collection("users").doc(uid);
   const snap = await ref.get();
 
-  if (snap.exists()) {
+  if (snap.exists) {
     return NextResponse.json({ created: false });
   }
 

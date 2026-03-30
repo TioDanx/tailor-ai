@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { adminAuth } from "@/lib/firebaseAdmin";
-import { GEMINI_MODEL } from "@/lib/ai";
+import { GEMINI_MODEL_CHAIN } from "@/lib/ai";
 import { checkRateLimit } from "@/lib/rateLimit";
 
 export const maxDuration = 60;
@@ -42,8 +42,6 @@ export async function POST(req: NextRequest) {
 
   const buffer = await file.arrayBuffer();
   const base64 = Buffer.from(buffer).toString("base64");
-
-  const model = genAI.getGenerativeModel({ model: GEMINI_MODEL });
 
   const prompt = `
 You are an expert CV parser. Extract all information from this CV/resume and return ONLY valid JSON — no markdown, no explanations.
@@ -103,21 +101,33 @@ Rules:
 `;
 
   try {
-    const result = await model.generateContent([
-      {
-        inlineData: {
-          mimeType: file.type as "application/pdf" | "text/plain",
-          data:     base64,
-        },
-      },
-      prompt,
-    ]);
+    let lastErr: unknown;
+    for (let i = 0; i < GEMINI_MODEL_CHAIN.length; i++) {
+      try {
+        const model = genAI.getGenerativeModel({ model: GEMINI_MODEL_CHAIN[i] });
+        const result = await model.generateContent([
+          {
+            inlineData: {
+              mimeType: file.type as "application/pdf" | "text/plain",
+              data:     base64,
+            },
+          },
+          prompt,
+        ]);
 
-    const text    = result.response.text().trim();
-    const cleaned = text.replace(/^```json\n?/, "").replace(/\n?```$/, "").trim();
-    const parsed  = JSON.parse(cleaned);
+        const text    = result.response.text().trim();
+        const cleaned = text.replace(/^```json\n?/, "").replace(/\n?```$/, "").trim();
+        const parsed  = JSON.parse(cleaned);
 
-    return NextResponse.json(parsed);
+        return NextResponse.json(parsed);
+      } catch (err) {
+        lastErr = err;
+        const status = (err as { status?: number })?.status;
+        if ((status === 429 || status === 503) && i < GEMINI_MODEL_CHAIN.length - 1) continue;
+        throw err;
+      }
+    }
+    throw lastErr;
   } catch (err) {
     console.error("parse-cv error:", err);
     return NextResponse.json({ error: "Failed to parse CV" }, { status: 500 });
