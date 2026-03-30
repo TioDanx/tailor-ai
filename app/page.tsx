@@ -117,16 +117,16 @@ function LandingContent() {
           {user ? (
             <Link
               href="/dashboard"
-              className="button-gradient text-on-primary-container px-5 py-2 rounded-lg font-semibold hover:scale-[1.02] transition-transform duration-200 active:scale-95"
+              className="text-gray-400 hover:text-white transition-colors text-sm font-medium"
             >
-              Go to Dashboard
+              Dashboard
             </Link>
           ) : (
             <button
-              onClick={() => openAuth("signup")}
-              className="button-gradient text-on-primary-container px-5 py-2 rounded-lg font-semibold hover:scale-[1.02] transition-transform duration-200 active:scale-95"
+              onClick={() => openAuth("signin")}
+              className="text-gray-400 hover:text-white transition-colors text-sm font-medium"
             >
-              Get started
+              Sign in
             </button>
           )}
         </div>
