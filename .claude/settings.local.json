@@ -20,7 +20,8 @@
       "Bash(grep -rn \"STRIPE_STARTER_PRICE_ID\\\\|STRIPE_PRO_PRICE_ID\" . --include=*.ts --include=*.tsx --include=*.env*)",
       "Bash(find /d/dev/landing-andy/tailor-ai/__tests__ -name *.test.ts -o -name *.test.tsx)",
       "Bash(grep -r \"throw new Error\\\\|console.error\\\\|FIXME\\\\|TODO\\\\|STUB\" /d/dev/landing-andy/tailor-ai/app --include=*.tsx --include=*.ts)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(xargs cat:*)"
     ]
   }
 }

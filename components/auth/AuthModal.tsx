@@ -11,7 +11,7 @@ interface AuthModalProps {
 
 export function AuthModal({ onClose }: AuthModalProps) {
   const { signInWithGoogle } = useAuth();
-  const router  = useRouter();
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error,   setError]   = useState("");
 

@@ -1,11 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { adminAuth } from "@/lib/firebaseAdmin";
 
-export const runtime = "nodejs";
-
 const PROTECTED = ["/dashboard", "/generate", "/history", "/profile"];
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
   if (!PROTECTED.some((p) => pathname.startsWith(p))) {
     return NextResponse.next();
