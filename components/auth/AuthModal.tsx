@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { useAuth } from "@/contexts/AuthContext";
 
 interface AuthModalProps {
@@ -11,7 +10,6 @@ interface AuthModalProps {
 
 export function AuthModal({ onClose }: AuthModalProps) {
   const { signInWithGoogle } = useAuth();
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error,   setError]   = useState("");
 
@@ -20,7 +18,6 @@ export function AuthModal({ onClose }: AuthModalProps) {
     setError("");
     try {
       await signInWithGoogle();
-      router.push("/dashboard");
       onClose();
     } catch {
       setError("No se pudo iniciar sesión. Intentá de nuevo.");

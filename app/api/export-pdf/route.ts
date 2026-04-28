@@ -10,10 +10,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { cvData } = await req.json() as { cvData: CVData };
+  const { cvData, lang = "en" } = await req.json() as { cvData: CVData; lang?: "es" | "en" };
   if (!cvData) {
     return NextResponse.json({ error: "cvData is required" }, { status: 400 });
   }
+
+  const labels = lang === "es"
+    ? { summary: "Resumen Profesional", experience: "Experiencia Profesional", projects: "Proyectos", education: "Educación", skills: "Habilidades Técnicas", languages: "Idiomas", eduIn: "en" }
+    : { summary: "Professional Summary", experience: "Professional Experience", projects: "Projects", education: "Education", skills: "Technical Skills", languages: "Languages", eduIn: "in" };
 
   const c = cvData.contact_info;
 
@@ -48,12 +52,12 @@ ${c.title ? `<p class="cv-title">${c.title}</p>` : ""}
 </div>
 
 ${cvData.description ? `
-<h2>Professional Summary</h2>
+<h2>${labels.summary}</h2>
 <div class="summary-block"><p>${cvData.description}</p></div>
 ` : ""}
 
 ${cvData.experience?.length ? `
-<h2>Professional Experience</h2>
+<h2>${labels.experience}</h2>
 ${cvData.experience.map((exp) => `
 <div class="exp-item">
   <div class="exp-header">
@@ -68,7 +72,7 @@ ${cvData.experience.map((exp) => `
 ` : ""}
 
 ${cvData.projects?.length ? `
-<h2>Projects</h2>
+<h2>${labels.projects}</h2>
 ${cvData.projects.map((proj) => `
 <div class="exp-item">
   <div class="exp-header">
@@ -81,11 +85,11 @@ ${cvData.projects.map((proj) => `
 ` : ""}
 
 ${cvData.education?.length ? `
-<h2>Education</h2>
+<h2>${labels.education}</h2>
 ${cvData.education.map((edu) => `
 <div class="edu-item">
   <div class="exp-header">
-    <span style="font-weight:bold; font-size:10px">${edu.degree}${edu.field ? ` in ${edu.field}` : ""}</span>
+    <span style="font-weight:bold; font-size:10px">${edu.degree}${edu.field ? ` ${labels.eduIn} ${edu.field}` : ""}</span>
     <span style="font-size:9px; font-family:Arial">${edu.institution}${edu.year ? ` • ${edu.year}` : ""}</span>
   </div>
 </div>
@@ -93,12 +97,12 @@ ${cvData.education.map((edu) => `
 ` : ""}
 
 ${cvData.additional_info?.skills ? `
-<h2>Technical Skills</h2>
+<h2>${labels.skills}</h2>
 <p>${cvData.additional_info.skills}</p>
 ` : ""}
 
 ${cvData.additional_info?.languages ? `
-<h2>Languages</h2>
+<h2>${labels.languages}</h2>
 <p>${cvData.additional_info.languages}</p>
 ` : ""}
 

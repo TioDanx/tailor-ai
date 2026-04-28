@@ -53,7 +53,7 @@ function FadeIn({
 // ─────────────────────────────────────────────────────────────────────────────
 
 function LandingContent() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const [showAuth, setShowAuth] = useState(false);
   const [authMode, setAuthMode] = useState<"signin" | "signup">("signin");
   const [mounted, setMounted] = useState(false);
@@ -64,6 +64,12 @@ function LandingContent() {
     const t = requestAnimationFrame(() => setMounted(true));
     return () => cancelAnimationFrame(t);
   }, []);
+
+  useEffect(() => {
+    if (!loading && user) {
+      window.location.replace("/dashboard");
+    }
+  }, [user, loading]);
 
   useEffect(() => {
     function onScroll() {

@@ -157,7 +157,7 @@ export default function GeneratePage() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ cvData }),
+        body: JSON.stringify({ cvData, lang: analysis?.lang ?? "en" }),
       });
       if (!res.ok) throw new Error("PDF export failed");
       const blob = await res.blob();
@@ -703,7 +703,7 @@ export default function GeneratePage() {
                     </span>
                   </div>
                 )}
-                <CVPreview cv={cvData} editable={manualEdit} onChange={setCvData} />
+                <CVPreview cv={cvData} lang={analysis?.lang ?? "en"} editable={manualEdit} onChange={setCvData} />
                 <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
               </div>
 

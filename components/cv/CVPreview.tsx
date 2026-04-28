@@ -5,13 +5,18 @@ import { CVData } from "@/types";
 
 interface CVPreviewProps {
   cv: CVData;
+  lang?: "es" | "en";
   className?: string;
   editable?: boolean;
   onChange?: (updated: CVData) => void;
 }
 
-export function CVPreview({ cv, className = "", editable = false, onChange }: CVPreviewProps) {
+export function CVPreview({ cv, lang = "en", className = "", editable = false, onChange }: CVPreviewProps) {
   const { contact_info: c, description, experience, education, additional_info } = cv;
+
+  const labels = lang === "es"
+    ? { summary: "Resumen Profesional", experience: "Experiencia Profesional", projects: "Proyectos", education: "Educación", skills: "Habilidades Técnicas", languages: "Idiomas", eduIn: "en" }
+    : { summary: "Professional Summary", experience: "Professional Experience", projects: "Projects", education: "Education", skills: "Technical Skills", languages: "Languages", eduIn: "in" };
 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [contentHeightPx, setContentHeightPx] = useState<number | null>(null);
@@ -127,7 +132,7 @@ export function CVPreview({ cv, className = "", editable = false, onChange }: CV
         {(description || editable) && (
           <div className="mb-6">
             <h2 className="text-sm font-bold uppercase tracking-widest border-b border-gray-300 mb-3 font-sans">
-              Professional Summary
+              {labels.summary}
             </h2>
             <p
               {...editableProps}
@@ -143,7 +148,7 @@ export function CVPreview({ cv, className = "", editable = false, onChange }: CV
         {experience.length > 0 && (
           <div className="mb-6">
             <h2 className="text-sm font-bold uppercase tracking-widest border-b border-gray-300 mb-3 font-sans">
-              Professional Experience
+              {labels.experience}
             </h2>
             {experience.map((exp, i) => (
               <div key={i} className="mb-4">
@@ -205,7 +210,7 @@ export function CVPreview({ cv, className = "", editable = false, onChange }: CV
         {cv.projects && cv.projects.length > 0 && (
           <div className="mb-6">
             <h2 className="text-sm font-bold uppercase tracking-widest border-b border-gray-300 mb-3 font-sans">
-              Projects
+              {labels.projects}
             </h2>
             {cv.projects.map((proj, i) => (
               <div key={i} className="mb-3">
@@ -241,7 +246,7 @@ export function CVPreview({ cv, className = "", editable = false, onChange }: CV
         {education.length > 0 && (
           <div className="mb-6">
             <h2 className="text-sm font-bold uppercase tracking-widest border-b border-gray-300 mb-3 font-sans">
-              Education
+              {labels.education}
             </h2>
             {education.map((edu, i) => (
               <div key={i} className="flex justify-between items-baseline">
@@ -254,7 +259,7 @@ export function CVPreview({ cv, className = "", editable = false, onChange }: CV
                     {edu.degree}
                   </span>
                   {(edu.field || editable) && (
-                    <> in <span
+                    <> {labels.eduIn} <span
                       {...editableProps}
                       className={ec}
                       onBlur={(e) => onChange?.(patch((d) => { d.education[i].field = e.currentTarget.textContent ?? ""; }))}
@@ -290,7 +295,7 @@ export function CVPreview({ cv, className = "", editable = false, onChange }: CV
         {additional_info?.skills && (
           <div className="mb-6">
             <h2 className="text-sm font-bold uppercase tracking-widest border-b border-gray-300 mb-3 font-sans">
-              Technical Skills
+              {labels.skills}
             </h2>
             <p
               {...editableProps}
@@ -306,7 +311,7 @@ export function CVPreview({ cv, className = "", editable = false, onChange }: CV
         {additional_info?.languages && (
           <div>
             <h2 className="text-sm font-bold uppercase tracking-widest border-b border-gray-300 mb-3 font-sans">
-              Languages
+              {labels.languages}
             </h2>
             <p
               {...editableProps}

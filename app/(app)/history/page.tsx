@@ -46,7 +46,7 @@ export default function HistoryPage() {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ cvData: entry.cvData }),
+        body: JSON.stringify({ cvData: entry.cvData, lang: entry.lang ?? "en" }),
       });
       if (!res.ok) throw new Error();
       const blob = await res.blob();
@@ -233,7 +233,7 @@ export default function HistoryPage() {
               {/* CV canvas */}
               <div className="flex-1 overflow-y-auto bg-surface-container-lowest p-8 md:p-12">
                 <div className="max-w-[800px] mx-auto cv-preview-shadow">
-                  <CVPreview cv={selected.cvData} />
+                  <CVPreview cv={selected.cvData} lang={selected.lang ?? "en"} />
                 </div>
               </div>
             </div>

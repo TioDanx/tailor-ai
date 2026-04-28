@@ -50,7 +50,6 @@ export default function ProfilePage() {
   }
 
   // ── experience helpers ────────────────────────────────────────────────────
-  // Text field changes: update draft only (saved with Save button)
   function updateDraftExp(idx: number, patch: Partial<Experience>) {
     setDraft((prev) => {
       if (!prev) return prev;
@@ -59,18 +58,7 @@ export default function ProfilePage() {
       ) as Experience[];
       return { ...prev, experience: next };
     });
-  }
-
-  // Structural changes (add/remove bullets/tech): update draft + save immediately
-  function updateExpNow(idx: number, patch: Partial<Experience>) {
-    setDraft((prev) => {
-      if (!prev) return prev;
-      const next = toArr(prev.experience).map((e, i) =>
-        i === idx ? { ...e, ...patch } : e
-      ) as Experience[];
-      updateProfile({ experience: next });
-      return { ...prev, experience: next };
-    });
+    setIsDirty(true);
   }
 
   // ── project helpers ───────────────────────────────────────────────────────
@@ -82,17 +70,7 @@ export default function ProfilePage() {
       ) as Project[];
       return { ...prev, projects: next };
     });
-  }
-
-  function updateProjNow(idx: number, patch: Partial<Project>) {
-    setDraft((prev) => {
-      if (!prev) return prev;
-      const next = (prev.projects ?? []).map((p, i) =>
-        i === idx ? { ...p, ...patch } : p
-      ) as Project[];
-      updateProfile({ projects: next });
-      return { ...prev, projects: next };
-    });
+    setIsDirty(true);
   }
 
   // ── save ──────────────────────────────────────────────────────────────────
@@ -224,22 +202,19 @@ export default function ProfilePage() {
     const existing = (draft?.languages ?? []).map((l) => l.name.toLowerCase());
     if (existing.includes(newLangName.trim().toLowerCase())) return;
     const updated = [...(draft?.languages ?? []), { name: newLangName.trim(), level: newLangLevel }];
-    updateDraft({ languages: updated }, false);
-    updateProfile({ languages: updated });
+    updateDraft({ languages: updated });
     setNewLangName("");
     setNewLangLevel("intermediate");
   }
 
   function removeLanguage(name: string) {
     const updated = (draft?.languages ?? []).filter((l) => l.name !== name);
-    updateDraft({ languages: updated }, false);
-    updateProfile({ languages: updated });
+    updateDraft({ languages: updated });
   }
 
   function updateLanguageLevel(name: string, level: LanguageLevel) {
     const updated = (draft?.languages ?? []).map((l) => l.name === name ? { ...l, level } : l);
-    updateDraft({ languages: updated }, false);
-    updateProfile({ languages: updated });
+    updateDraft({ languages: updated });
   }
 
   // ── skills ────────────────────────────────────────────────────────────────
@@ -249,29 +224,25 @@ export default function ProfilePage() {
   function addHardSkill() {
     if (!newHardSkill.trim()) return;
     const updated = [...toArr(draft?.hardSkills), newHardSkill.trim()];
-    updateDraft({ hardSkills: updated }, false);
-    updateProfile({ hardSkills: updated });
+    updateDraft({ hardSkills: updated });
     setNewHardSkill("");
   }
 
   function removeHardSkill(skill: string) {
     const updated = toArr(draft?.hardSkills).filter((s) => s !== skill);
-    updateDraft({ hardSkills: updated }, false);
-    updateProfile({ hardSkills: updated });
+    updateDraft({ hardSkills: updated });
   }
 
   function addSoftSkill() {
     if (!newSoftSkill.trim()) return;
     const updated = [...toArr(draft?.softSkills), newSoftSkill.trim()];
-    updateDraft({ softSkills: updated }, false);
-    updateProfile({ softSkills: updated });
+    updateDraft({ softSkills: updated });
     setNewSoftSkill("");
   }
 
   function removeSoftSkill(skill: string) {
     const updated = toArr(draft?.softSkills).filter((s) => s !== skill);
-    updateDraft({ softSkills: updated }, false);
-    updateProfile({ softSkills: updated });
+    updateDraft({ softSkills: updated });
   }
 
   // ── summary optimize ──────────────────────────────────────────────────────
@@ -296,7 +267,6 @@ export default function ProfilePage() {
       if (!res.ok) throw new Error("Failed to optimize");
       const { summary } = await res.json();
       updateDraft({ shortDescription: summary });
-      await updateProfile({ shortDescription: summary });
     } catch (err) {
       console.error("Optimize summary error:", err);
     } finally {
@@ -310,29 +280,23 @@ export default function ProfilePage() {
       id: nanoid(), company: "", role: "", startDate: "", endDate: "Present",
       location: "", achievements: [], techStack: [],
     };
-    const updated = [...toArr(draft?.experience), blank];
-    updateDraft({ experience: updated }, false);
-    updateProfile({ experience: updated });
+    updateDraft({ experience: [...toArr(draft?.experience), blank] });
   }
 
   function deleteExperience(idx: number) {
     const updated = toArr(draft?.experience).filter((_, i) => i !== idx) as Experience[];
-    updateDraft({ experience: updated }, false);
-    updateProfile({ experience: updated });
+    updateDraft({ experience: updated });
   }
 
   // ── project structural ops ─────────────────────────────────────────────────
   function addProject() {
     const blank: Project = { id: nanoid(), name: "", description: "", url: "", tech: [] };
-    const updated = [...(draft?.projects ?? []), blank];
-    updateDraft({ projects: updated }, false);
-    updateProfile({ projects: updated });
+    updateDraft({ projects: [...(draft?.projects ?? []), blank] });
   }
 
   function deleteProject(idx: number) {
     const updated = (draft?.projects ?? []).filter((_, i) => i !== idx);
-    updateDraft({ projects: updated }, false);
-    updateProfile({ projects: updated });
+    updateDraft({ projects: updated });
   }
 
   return (
@@ -591,7 +555,7 @@ export default function ProfilePage() {
                               type="button"
                               onClick={() => {
                                 const next = (exp.achievements ?? []).filter((_, i) => i !== ai);
-                                updateExpNow(idx, { achievements: next });
+                                updateDraftExp(idx, { achievements: next });
                               }}
                               className="text-outline hover:text-error transition-colors shrink-0"
                             >
@@ -602,7 +566,7 @@ export default function ProfilePage() {
                       </ul>
                       <button
                         type="button"
-                        onClick={() => updateExpNow(idx, { achievements: [...(exp.achievements ?? []), ""] })}
+                        onClick={() => updateDraftExp(idx, { achievements: [...(exp.achievements ?? []), ""] })}
                         className="text-xs text-primary font-bold flex items-center gap-1 mt-2"
                       >
                         <span className="material-symbols-outlined text-xs">add</span> Add Point
@@ -617,7 +581,7 @@ export default function ProfilePage() {
                           <button
                             key={t}
                             type="button"
-                            onClick={() => updateExpNow(idx, { techStack: (exp.techStack ?? []).filter((s) => s !== t) })}
+                            onClick={() => updateDraftExp(idx, { techStack: (exp.techStack ?? []).filter((s) => s !== t) })}
                             className="px-2 py-0.5 bg-surface-container text-outline rounded text-[10px] uppercase font-label hover:bg-error/10 hover:text-error transition-colors"
                           >
                             {t} ×
@@ -631,7 +595,7 @@ export default function ProfilePage() {
                               e.preventDefault();
                               const val = e.currentTarget.value.trim();
                               if (val) {
-                                updateExpNow(idx, { techStack: [...(exp.techStack ?? []), val] });
+                                updateDraftExp(idx, { techStack: [...(exp.techStack ?? []), val] });
                                 e.currentTarget.value = "";
                               }
                             }
@@ -710,7 +674,7 @@ export default function ProfilePage() {
                           <button
                             key={t}
                             type="button"
-                            onClick={() => updateProjNow(idx, { tech: (proj.tech ?? []).filter((s) => s !== t) })}
+                            onClick={() => updateDraftProj(idx, { tech: (proj.tech ?? []).filter((s) => s !== t) })}
                             className="px-2 py-0.5 bg-surface-container text-outline rounded text-[10px] uppercase font-label hover:bg-error/10 hover:text-error transition-colors"
                           >
                             {t} ×
@@ -724,7 +688,7 @@ export default function ProfilePage() {
                               e.preventDefault();
                               const val = e.currentTarget.value.trim();
                               if (val) {
-                                updateProjNow(idx, { tech: [...(proj.tech ?? []), val] });
+                                updateDraftProj(idx, { tech: [...(proj.tech ?? []), val] });
                                 e.currentTarget.value = "";
                               }
                             }

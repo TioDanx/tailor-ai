@@ -111,7 +111,11 @@ Return this exact JSON structure (add profileFit only if instructed above):
     if (start === -1 || end === -1) throw new Error("No JSON object in response");
     const analysis: JDAnalysis = JSON.parse(rawText.slice(start, end + 1));
 
-    // If user explicitly picked a language, override whatever Gemini returned
+    const rawLang = String(analysis.lang ?? "").toLowerCase().trim();
+    analysis.lang = (rawLang === "es" || rawLang.startsWith("es") || rawLang === "spanish" || rawLang === "español")
+      ? "es"
+      : "en";
+
     if (lang !== "auto") {
       analysis.lang = lang as "es" | "en";
     }
