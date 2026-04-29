@@ -76,8 +76,9 @@ export async function POST(req: NextRequest) {
     name:        profile!.name,
     email:       profile!.email,
     phone:       profile!.phone,
-    linkedin:    profile!.linkedin ?? null,
-    location:    profile!.location ?? null,
+    linkedin:    profile!.linkedin  ?? null,
+    portfolio:   profile!.portfolio ?? null,
+    location:    profile!.location  ?? null,
     title:       profile!.title,
     description: profile!.shortDescription,
     skills:      [...(profile!.hardSkills ?? []), ...(profile!.softSkills ?? [])],
@@ -107,8 +108,8 @@ Return this exact JSON structure:
     "email": "email",
     "phone": "phone",
     "location": "location",
-    "linkedin": "linkedin url or null",
-    "portfolio": "portfolio url or null"
+    "linkedin": "linkedin url from candidate profile or null",
+    "portfolio": "portfolio url from candidate profile or null"
   },
   "description": "3-4 sentence tailored professional summary using ATS keywords from the job",
   "experience": [
@@ -148,6 +149,7 @@ Rules:
 - Use strong action verbs and quantifiable achievements
 - Keep bullet points concise and impactful
 - Only include projects from the candidate profile; if there are none, return "projects": []
+- Use linkedin and portfolio exactly as provided in the candidate profile; do not invent or modify them
 `;
 
   try {

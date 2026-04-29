@@ -50,6 +50,7 @@ export interface UserProfile {
   email: string;
   phone: string;
   linkedin?: string;
+  portfolio?: string;
   location?: string;
   photoURL?: string;
   title?: string;

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, ReactNode } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { useAuth } from "@/contexts/AuthContext";
@@ -54,6 +55,7 @@ function FadeIn({
 
 function LandingContent() {
   const { user, loading } = useAuth();
+  const router = useRouter();
   const [showAuth, setShowAuth] = useState(false);
   const [authMode, setAuthMode] = useState<"signin" | "signup">("signin");
   const [mounted, setMounted] = useState(false);
@@ -67,9 +69,10 @@ function LandingContent() {
 
   useEffect(() => {
     if (!loading && user) {
-      window.location.replace("/dashboard");
+      const timer = setTimeout(() => router.replace("/dashboard"), 600);
+      return () => clearTimeout(timer);
     }
-  }, [user, loading]);
+  }, [user, loading, router]);
 
   useEffect(() => {
     function onScroll() {
@@ -91,6 +94,26 @@ function LandingContent() {
       transform: mounted ? "translateY(0)" : "translateY(22px)",
       transition: `opacity 0.7s ease ${delayMs}ms, transform 0.7s ease ${delayMs}ms`,
     };
+  }
+
+  if (!loading && user) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary-container rounded-xl flex items-center justify-center animate-pulse">
+            <span
+              className="material-symbols-outlined text-on-primary-container text-2xl"
+              style={{ fontVariationSettings: "'FILL' 1" }}
+            >
+              auto_awesome
+            </span>
+          </div>
+          <p className="text-sm font-label text-outline uppercase tracking-widest">
+            Signing you in...
+          </p>
+        </div>
+      </div>
+    );
   }
 
   return (

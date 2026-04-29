@@ -416,8 +416,9 @@ export default function ProfilePage() {
                   { label: "Full Name",     field: "name",     type: "text" },
                   { label: "Email Address", field: "email",    type: "email" },
                   { label: "Phone Number",  field: "phone",    type: "text" },
-                  { label: "LinkedIn URL",  field: "linkedin", type: "text" },
-                  { label: "Location",      field: "location", type: "text" },
+                  { label: "LinkedIn URL",  field: "linkedin",  type: "text" },
+                  { label: "Portfolio URL", field: "portfolio", type: "text" },
+                  { label: "Location",      field: "location",  type: "text" },
                 ] as { label: string; field: keyof UserProfile; type: string }[]).map(({ label, field, type }) => (
                   <div key={field} className="space-y-1">
                     <label className="text-xs font-label uppercase tracking-widest text-outline">{label}</label>
