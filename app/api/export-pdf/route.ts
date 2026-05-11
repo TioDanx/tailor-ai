@@ -48,7 +48,15 @@ export async function POST(req: NextRequest) {
 <h1>${c.name}</h1>
 ${c.title ? `<p class="cv-title">${c.title}</p>` : ""}
 <div class="contact">
-  ${[c.location, c.email, c.phone, c.linkedin, c.portfolio].filter(Boolean).join(" • ")}
+  ${(
+    [
+      c.location ? c.location : null,
+      c.email    ? `<a href="mailto:${c.email}" style="color:inherit;text-decoration:none;">${c.email}</a>` : null,
+      c.phone    ? c.phone : null,
+      c.linkedin ? `<a href="${c.linkedin}" style="color:inherit;text-decoration:none;">LinkedIn</a>` : null,
+      c.portfolio? `<a href="${c.portfolio}" style="color:inherit;text-decoration:none;">Portfolio</a>` : null,
+    ] as (string | null)[]
+  ).filter(Boolean).join(" • ")}
 </div>
 
 ${cvData.description ? `

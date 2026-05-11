@@ -123,7 +123,30 @@ export function CVPreview({ cv, lang = "en", className = "", editable = false, o
                 })}
               </>
             ) : (
-              [c.location, c.email, c.phone, c.linkedin, c.portfolio].filter(Boolean).join(" • ")
+              <>
+                {(
+                  [
+                    c.location ? { label: c.location, href: null } : null,
+                    c.email    ? { label: c.email,    href: `mailto:${c.email}` } : null,
+                    c.phone    ? { label: c.phone,    href: `tel:${c.phone}` } : null,
+                    c.linkedin ? { label: "LinkedIn", href: c.linkedin } : null,
+                    c.portfolio? { label: "Portfolio",href: c.portfolio } : null,
+                  ] as ({ label: string; href: string | null } | null)[]
+                )
+                  .filter((item): item is { label: string; href: string | null } => item !== null)
+                  .map((item, i, arr) => (
+                    <span key={i}>
+                      {item.href ? (
+                        <a href={item.href} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                          {item.label}
+                        </a>
+                      ) : (
+                        <span>{item.label}</span>
+                      )}
+                      {i < arr.length - 1 && <span className="select-none"> • </span>}
+                    </span>
+                  ))}
+              </>
             )}
           </p>
         </div>

@@ -61,13 +61,14 @@ export async function generatePDF(cv: CVData, meta?: { role?: string; company?: 
   }
 
   // Contact
-  const contactLine = [c.location, c.email, c.phone, c.linkedin, c.portfolio]
-    .filter(Boolean)
-    .join(" • ");
+  const contactLine = (
+    [c.location, c.email, c.phone, c.linkedin ? "LinkedIn" : null, c.portfolio ? "Portfolio" : null] as (string | null)[]
+  ).filter(Boolean).join(" • ");
   doc.setFontSize(8);
   doc.setFont("helvetica", "italic");
   const contactLines = doc.splitTextToSize(contactLine, R - L);
   doc.text(contactLines, W / 2, y, { align: "center" });
+  y += contactLines.length * 3.2;
   line(2);
   doc.setDrawColor(50, 50, 50);
   doc.setLineWidth(0.5);
