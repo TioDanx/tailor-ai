@@ -87,9 +87,12 @@ export async function POST(req: NextRequest) {
     projects:    profile!.projects ?? [],
   });
 
+  const today = new Date().toISOString().split("T")[0];
+
   const prompt = `
 You are an expert CV writer. Using the candidate profile and job analysis below, create a tailored CV.
 Respond ONLY with valid JSON, no markdown.
+Today's date: ${today}
 
 Candidate Profile:
 ${profileSummary}
@@ -150,6 +153,7 @@ Rules:
 - Keep bullet points concise and impactful
 - Only include projects from the candidate profile; if there are none, return "projects": []
 - Use linkedin and portfolio exactly as provided in the candidate profile; do not invent or modify them
+- Calculate total years of professional experience from the experience[].startDate and experience[].endDate fields using today's date for any "Present" entries; use that figure when writing the description
 `;
 
   try {

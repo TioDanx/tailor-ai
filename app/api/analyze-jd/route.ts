@@ -38,8 +38,12 @@ export async function POST(req: NextRequest) {
       profileSnippet = JSON.stringify({
         skills:          [...(p.hardSkills ?? []), ...(p.softSkills ?? [])],
         currentRole:     p.title ?? null,
-        yearsExperience: (p.experience ?? []).length,
+        experience:      (p.experience ?? []).map((e: { startDate?: string; endDate?: string }) => ({
+          startDate: e.startDate ?? null,
+          endDate:   e.endDate   ?? null,
+        })),
         recentTechStack: (p.experience?.[0]?.techStack ?? []).slice(0, 8),
+        today:           new Date().toISOString().split("T")[0],
       });
     }
   } catch { /* ignore */ }
@@ -50,7 +54,8 @@ Also evaluate how well this candidate profile fits the job.
 Candidate profile (JSON):
 ${profileSnippet}
 
-Include a "profileFit" key in your response:
+Include a "profileFit" key in your response.
+Calculate total years of professional experience from the experience[].startDate and experience[].endDate fields using today's date for any "Present" entries.
 {
   "profileFit": {
     "score": <integer 0-100 reflecting overall fit>,
